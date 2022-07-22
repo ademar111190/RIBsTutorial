@@ -1,6 +1,7 @@
 package ademar.ribs.tutorial.root
 
 import ademar.ribs.tutorial.R
+import ademar.ribs.tutorial.loggedout.LoggedOutBuilder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.uber.rib.core.InteractorBaseComponent
@@ -44,7 +45,7 @@ class RootBuilder(
                 component: Component,
                 view: RootView,
                 interactor: RootInteractor
-            ) = RootRouter(view, interactor, component)
+            ) = RootRouter(view, interactor, component, LoggedOutBuilder(component))
         }
     }
 
@@ -52,7 +53,9 @@ class RootBuilder(
         modules = [Module::class],
         dependencies = [ParentComponent::class]
     )]
-    interface Component : InteractorBaseComponent<RootInteractor>, ParentComponent, BuilderComponent {
+    interface Component : InteractorBaseComponent<RootInteractor>,
+        LoggedOutBuilder.ParentComponent,
+        BuilderComponent {
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance fun interactor(interactor: RootInteractor): Builder
