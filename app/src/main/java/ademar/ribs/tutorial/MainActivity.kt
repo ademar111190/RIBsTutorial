@@ -1,11 +1,13 @@
 package ademar.ribs.tutorial
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import ademar.ribs.tutorial.root.RootBuilder
+import ademar.ribs.tutorial.root.RootBuilder.ParentComponent
+import android.view.ViewGroup
+import com.uber.rib.core.RibActivity
+import com.uber.rib.core.ViewRouter
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : RibActivity() {
+    override fun createRouter(parentViewGroup: ViewGroup): ViewRouter<*, *> {
+        return RootBuilder(object : ParentComponent {}).build(parentViewGroup)
     }
 }
