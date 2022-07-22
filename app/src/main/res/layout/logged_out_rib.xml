@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ademar.ribs.tutorial.loggedout.LoggedOutView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <Space
@@ -14,17 +14,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Enter your name" />
+        android:autofillHints="name"
+        android:hint="@string/enter_your_name"
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Login" />
+        android:text="@string/login" />
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 </ademar.ribs.tutorial.loggedout.LoggedOutView>
