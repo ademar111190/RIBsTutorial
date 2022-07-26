@@ -1,6 +1,7 @@
 package ademar.ribs.tutorial.root
 
 import ademar.ribs.tutorial.R
+import ademar.ribs.tutorial.loggedin.LoggedInBuilder
 import ademar.ribs.tutorial.loggedout.LoggedOutBuilder
 import ademar.ribs.tutorial.loggedout.LoggedOutInteractor
 import android.view.LayoutInflater
@@ -11,7 +12,6 @@ import dagger.Binds
 import dagger.BindsInstance
 import dagger.Provides
 import javax.inject.Scope
-
 
 class RootBuilder(
     dependency: ParentComponent,
@@ -47,7 +47,10 @@ class RootBuilder(
                 component: Component,
                 view: RootView,
                 interactor: RootInteractor,
-            ) = RootRouter(view, interactor, component, LoggedOutBuilder(component))
+            ) = RootRouter(
+                view, interactor, component,
+                LoggedOutBuilder(component), LoggedInBuilder(component),
+            )
 
             @[RootScope Provides]
             fun loggedOutListener(
@@ -61,8 +64,9 @@ class RootBuilder(
         dependencies = [ParentComponent::class]
     )]
     interface Component : InteractorBaseComponent<RootInteractor>,
+        BuilderComponent,
         LoggedOutBuilder.ParentComponent,
-        BuilderComponent {
+        LoggedInBuilder.ParentComponent {
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance fun interactor(interactor: RootInteractor): Builder
