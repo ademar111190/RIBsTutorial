@@ -16,4 +16,10 @@ class RootRouter(
         view.addView(router.view)
     }
 
+    fun detachLoggedOut() {
+    }
+
+    fun attachLoggedIn(userName: String) {
+    }
+
 }

@@ -21,13 +21,22 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+        }
+    }
+
 }
 
 dependencies {
@@ -44,4 +53,6 @@ dependencies {
 
     testImplementation "com.uber.rib:rib-test:0.13.0"
     testImplementation "junit:junit:4.13.2"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
+    testImplementation "org.mockito:mockito-inline:4.6.1"
 }

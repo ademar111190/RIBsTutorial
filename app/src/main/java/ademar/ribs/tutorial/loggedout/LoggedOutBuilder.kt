@@ -29,7 +29,9 @@ class LoggedOutBuilder(
         return inflater.inflate(R.layout.logged_out_rib, parentViewGroup, false) as LoggedOutView
     }
 
-    interface ParentComponent
+    interface ParentComponent {
+        fun listener(): LoggedOutInteractor.Listener
+    }
 
     @dagger.Module
     abstract class Module {

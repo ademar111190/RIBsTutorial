@@ -14,6 +14,7 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
     private val subscriptions = CompositeDisposable()
 
     @Inject lateinit var presenter: LoggedOutPresenter
+    @Inject lateinit var listener: Listener
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
@@ -23,7 +24,9 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
             Log.e("Ademar", "error: " + it.message)
         })
         subscriptions.add(presenter.loginSubmit().subscribe({
-            Log.d("Ademar", "click: $it")
+            if (it.isNotBlank()) {
+                listener.login(it)
+            }
         }) {
             Log.e("Ademar", "error: " + it.message)
         })
@@ -37,6 +40,10 @@ class LoggedOutInteractor : Interactor<LoggedOutInteractor.LoggedOutPresenter, L
     interface LoggedOutPresenter {
         fun loginName(): Observable<String>
         fun loginSubmit(): Observable<String>
+    }
+
+    interface Listener {
+        fun login(userName: String)
     }
 
 }
