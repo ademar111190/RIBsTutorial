@@ -18,7 +18,8 @@ class OffGameView @JvmOverloads constructor(
 
     private lateinit var button: Button
 
-    @Initializer override fun onFinishInflate() {
+    @Initializer
+    override fun onFinishInflate() {
         super.onFinishInflate()
         button = findViewById(R.id.start_game_button)
     }

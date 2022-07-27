@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
+import com.uber.rib.core.Initializer
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject.create
 import io.reactivex.subjects.Subject
@@ -22,6 +23,7 @@ class LoggedOutView @JvmOverloads constructor(
     private val loginNameSubject: Subject<String> = create()
     private val loginSubmitSubject: Subject<String> = create()
 
+    @Initializer
     override fun onFinishInflate() {
         super.onFinishInflate()
         val editText = findViewById<EditText>(R.id.edit_text)

@@ -6,4 +6,7 @@
     <string name="player_two_name">Nome do segundo jogador</string>
     <string name="win_count">nº vitórias</string>
     <string name="start_game">Começar jogo</string>
+    <string name="current_player">Vez do: %s</string>
+    <string name="player_won">Vencedor: %s</string>
+    <string name="tie_game">Empate</string>
 </resources>
