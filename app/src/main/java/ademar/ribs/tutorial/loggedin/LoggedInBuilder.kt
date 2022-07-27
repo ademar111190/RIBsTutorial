@@ -1,5 +1,8 @@
 package ademar.ribs.tutorial.loggedin
 
+import ademar.ribs.tutorial.loggedin.offgame.OffGameBuilder
+import ademar.ribs.tutorial.loggedin.offgame.OffGameInteractor
+import ademar.ribs.tutorial.loggedin.tictactoe.TicTacToeBuilder
 import ademar.ribs.tutorial.root.RootView
 import com.uber.rib.core.Builder
 import com.uber.rib.core.EmptyPresenter
@@ -15,7 +18,7 @@ class LoggedInBuilder(
 
     fun build(): LoggedInRouter {
         val interactor = LoggedInInteractor()
-        val component:Component = DaggerLoggedInBuilder_Component.builder()
+        val component: Component = DaggerLoggedInBuilder_Component.builder()
             .parentComponent(dependency)
             .interactor(interactor)
             .build()
@@ -41,13 +44,22 @@ class LoggedInBuilder(
             component,
             rootView,
         )
+
+        @[LoggedInScope Provides]
+        fun offGameListener(
+            interactor: LoggedInInteractor,
+        ): OffGameInteractor.Listener = interactor.OffGameListener()
     }
 
     @[LoggedInScope dagger.Component(
         modules = [Module::class],
         dependencies = [ParentComponent::class]
     )]
-    interface Component : InteractorBaseComponent<LoggedInInteractor>, BuilderComponent {
+    interface Component : InteractorBaseComponent<LoggedInInteractor>,
+        BuilderComponent,
+        OffGameBuilder.ParentComponent,
+        TicTacToeBuilder.ParentComponent {
+
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance fun interactor(interactor: LoggedInInteractor): Builder

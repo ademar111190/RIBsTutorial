@@ -8,4 +8,11 @@ class LoggedInRouter(
     component: LoggedInBuilder.Component,
     rootView: ViewGroup,
 ) : Router<LoggedInInteractor>(interactor, component) {
+
+    fun attachOffGame() {}
+
+    fun detachOffGame() {}
+
+    fun attachTicTacToe() {}
+
 }

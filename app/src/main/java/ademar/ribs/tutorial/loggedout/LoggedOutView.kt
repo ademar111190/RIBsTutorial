@@ -13,8 +13,11 @@ import io.reactivex.subjects.BehaviorSubject.create
 import io.reactivex.subjects.Subject
 
 class LoggedOutView @JvmOverloads constructor(
-    context: Context, attrs: AttributeSet? = null
-) : LinearLayout(context, attrs), LoggedOutInteractor.LoggedOutPresenter {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0,
+) : LinearLayout(context, attrs, defStyleAttr, defStyleRes), LoggedOutInteractor.LoggedOutPresenter {
 
     private val loginNameSubject: Subject<String> = create()
     private val loginSubmitSubject: Subject<String> = create()

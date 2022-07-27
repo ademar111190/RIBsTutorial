@@ -67,6 +67,7 @@ class RootBuilder(
         BuilderComponent,
         LoggedOutBuilder.ParentComponent,
         LoggedInBuilder.ParentComponent {
+
         @dagger.Component.Builder
         interface Builder {
             @BindsInstance fun interactor(interactor: RootInteractor): Builder
