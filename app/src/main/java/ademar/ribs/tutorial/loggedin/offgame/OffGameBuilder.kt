@@ -1,11 +1,32 @@
 package ademar.ribs.tutorial.loggedin.offgame
 
+import ademar.ribs.tutorial.R
 import ademar.ribs.tutorial.loggedin.offgame.OffGameInteractor.OffGamePresenter
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import com.uber.rib.core.InteractorBaseComponent
+import com.uber.rib.core.ViewBuilder
 import dagger.*
 import javax.inject.Scope
 
-class OffGameBuilder {
+class OffGameBuilder(
+    dependency: ParentComponent,
+) : ViewBuilder<OffGameView, OffGameRouter, OffGameBuilder.ParentComponent>(dependency) {
+
+    fun build(parentViewGroup: ViewGroup): OffGameRouter {
+        val view = createView(parentViewGroup)
+        val interactor = OffGameInteractor()
+        val component = DaggerOffGameBuilder_Component.builder()
+            .parentComponent(dependency)
+            .view(view)
+            .interactor(interactor)
+            .build()
+        return component.offGameRouter()
+    }
+
+    override fun inflateView(inflater: LayoutInflater, parentViewGroup: ViewGroup): OffGameView {
+        return inflater.inflate(R.layout.off_game_rib, parentViewGroup, false) as OffGameView
+    }
 
     interface ParentComponent {
         fun listener(): OffGameInteractor.Listener
@@ -33,8 +54,11 @@ class OffGameBuilder {
     interface Component : InteractorBaseComponent<OffGameInteractor>, BuilderComponent {
         @dagger.Component.Builder
         interface Builder {
-            @BindsInstance fun interactor(interactor: OffGameInteractor): Builder
-            @BindsInstance fun view(view: OffGameView): Builder
+            @BindsInstance
+            fun interactor(interactor: OffGameInteractor): Builder
+
+            @BindsInstance
+            fun view(view: OffGameView): Builder
             fun parentComponent(component: ParentComponent): Builder
             fun build(): Component
         }

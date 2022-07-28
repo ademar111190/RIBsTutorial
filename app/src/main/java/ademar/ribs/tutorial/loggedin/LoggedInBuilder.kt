@@ -43,6 +43,8 @@ class LoggedInBuilder(
             interactor,
             component,
             rootView,
+            OffGameBuilder(component),
+            TicTacToeBuilder(component),
         )
 
         @[LoggedInScope Provides]
